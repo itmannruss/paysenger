@@ -50,6 +50,20 @@ function hideTab() {
   })
 }
 
+function onEntry(entry) {
+  entry.forEach(change => {
+    if (change.isIntersecting) {
+      change.target.classList.add('element-show')
+    }
+  })
+}
+let options = { threshold: [0.5] }
+let observer = new IntersectionObserver(onEntry, options)
+let elements = document.querySelectorAll('.element-animation')
+for (let elm of elements) {
+  observer.observe(elm)
+}
+
 const swiper = new Swiper('.partners__container', {
   slidesPerView: 1,
   spaceBetween: 23,
@@ -71,12 +85,14 @@ const swiper = new Swiper('.partners__container', {
 
     992: {
       loop: false,
-      slidesPerView: 2.4,
+      slidesPerView: 2.34,
+      allowTouchMove: true,
     },
 
     1161: {
       slidesPerView: 3,
       loop: false,
+      allowTouchMove: false,
     },
   },
 })
