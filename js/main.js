@@ -10,25 +10,30 @@ function myFunction() {
   burger.classList.toggle('active')
 }
 
-const anchors = document.querySelectorAll('a[href*="#"]')
+const navLinks = document.querySelectorAll('.header__menu-link');
+for (let navLink of navLinks) {
+    navLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        let href = this.getAttribute('href').substring(1);
+        var element2 = document.querySelector('.header__menu')
+        var burger2 = document.querySelector('.burger')
+        var body2 = document.querySelector('body')
+        body2.classList.remove('active')
+        element2.classList.remove('active')
+        burger2.classList.remove('active')
+        const scrollTarget = document.getElementById(href);
 
-for (let anchor of anchors) {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault()
-    var element2 = document.querySelector('.header__menu')
-    var burger2 = document.querySelector('.burger')
-    var body2 = document.querySelector('body')
-    body2.classList.remove('active')
-    element2.classList.remove('active')
-    burger2.classList.remove('active')
-    const blockID = anchor.getAttribute('href').substr(1)
+        const topOffset = document.querySelector('.header').offsetHeight;
+        const elementPosition = scrollTarget.getBoundingClientRect().top;
+        const offsetPosition = elementPosition - topOffset;
 
-    document.getElementById(blockID).scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    })
-  })
-}
+        window.scrollBy({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+        document.querySelector('body').classList.remove('menu-open')
+    });
+};
 
 let tab = document.querySelectorAll('.tab-header'),
   tabContent = document.querySelectorAll('.tab-content')
@@ -85,7 +90,7 @@ const swiper = new Swiper('.partners__container', {
 
     992: {
       loop: false,
-      slidesPerView: 2.34,
+      slidesPerView: 2.3,
       allowTouchMove: true,
     },
 
