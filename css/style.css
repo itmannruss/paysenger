@@ -362,7 +362,7 @@ ul {
 
 @media screen and (max-width: 1160px) {
   .showcase {
-    padding: 178px 0 114px 0;
+    padding: 143px 0 114px 0;
   }
 }
 
@@ -1767,6 +1767,7 @@ ul {
 
 @media only screen and (max-width: 1160px) {
   .partners__container {
+    position: relative;
     overflow: visible;
   }
 }
